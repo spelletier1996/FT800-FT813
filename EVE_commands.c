@@ -195,6 +195,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 #include "EVE.h"
 
+#define BT81X_ENABLE
+
 #if defined (BT81X_ENABLE)
 #include <stdarg.h>
 #endif

@@ -84,6 +84,90 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 */
 
+#if defined (__ATSAME70Q21B__) 
+		/* note: target as set by AtmelStudio, valid  are all from the same family, ATSAMC2x and ATSAMx5x use the same SERCOM units */
+
+		#include "definitions.h"
+
+		#if defined (__ATSAME70Q21B__) 
+		#define EVE_DELAY_1MS 300000	/* ~1ms at 300000MHz Core-Clock and activated cache, according to my Logic-Analyzer */
+		#endif
+
+
+		#if defined (EVE_DMA)
+			extern uint8_t EVE_dma_buffer[4100];
+			extern volatile uint16_t EVE_dma_buffer_index;
+			extern volatile uint8_t EVE_dma_busy;
+
+			void EVE_init_dma(void);
+			void EVE_start_dma_transfer(void);
+		#endif
+
+		void DELAY_MS(uint16_t val);
+
+
+		static inline void EVE_pdn_set(void)
+		{
+			PIOD_REGS->PIO_SODR = (1<<25);
+		}
+
+		static inline void EVE_pdn_clear(void)
+		{
+			PIOD_REGS->PIO_CODR = (1<<25);
+		}
+
+		static inline void EVE_cs_set(void)
+		{
+			//PORT->Group[EVE_CS_PORT].OUTCLR.reg = EVE_CS;
+		}
+
+		static inline void EVE_cs_clear(void)
+		{
+			//PORT->Group[EVE_CS_PORT].OUTSET.reg = EVE_CS;
+		}
+
+		static inline void spi_transmit_async(uint8_t data)
+		{
+			#if defined (EVE_DMA)
+				EVE_dma_buffer[EVE_dma_buffer_index++] = data;
+			#else
+				SPI0_Write(&data, 1);
+            
+                while(SPI0_IsBusy());
+			#endif
+		}
+
+		static inline void spi_transmit(uint8_t data)
+		{
+			
+            SPI0_Write(&data, 1);
+            
+            while(SPI0_IsBusy());
+            
+		}
+
+		static inline uint8_t spi_receive(uint8_t data)
+		{
+            uint8_t recieveData;
+            
+            SPI0_WriteRead(&data, 1, &recieveData, 1);
+            
+            while(SPI0_IsBusy());
+            
+            return recieveData;
+            
+//			EVE_SPI->SPI.DATA.reg = data;
+//			while((EVE_SPI->SPI.INTFLAG.reg & SERCOM_SPI_INTFLAG_TXC) == 0);
+//			return EVE_SPI->SPI.DATA.reg;
+		}
+
+		static inline uint8_t fetch_flash_byte(const uint8_t *data)
+		{
+			return *data;
+		}
+
+		#endif /* SAMC2x / SAMx5x */
+
 #if !defined (ARDUINO)
 
 	#if defined (__IMAGECRAFT__)
