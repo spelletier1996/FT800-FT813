@@ -193,7 +193,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 */
 
-#include "EVE.h"
+#include "/home/seb/HarmonyProjects/FT800-FT813/EVE.h"
+#include "/home/seb/HarmonyProjects/FT800-FT813/EVE_commands.h"
+#include "/home/seb/HarmonyProjects/FT800-FT813/EVE_target.h"
 
 #define BT81X_ENABLE
 
@@ -1146,6 +1148,8 @@ uint8_t EVE_init(void)
 			return 0;
 		}
 	}
+    
+    //USART1_Write(&chipid, 1);
 
 	timeout = 0;
 	while (0x00 != (EVE_memRead8(REG_CPURESET) & 0x03)) /* check if EVE is in working status */

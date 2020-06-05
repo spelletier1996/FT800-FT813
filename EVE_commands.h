@@ -99,7 +99,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 */
 
-#include "EVE.h"
+#include "/home/seb/HarmonyProjects/FT800-FT813/EVE.h"
 
 #ifndef EVE_COMMANDS_H_
 #define EVE_COMMANDS_H_

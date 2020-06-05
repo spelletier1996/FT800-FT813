@@ -101,7 +101,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 	#define EVE_CONNECTEVE
 #endif
 
-#define EVE_CFAF800480E0_050SC
+#define EVE_VM810C
 
 
 /* display timing parameters below */

@@ -73,8 +73,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 */
 
-#include "EVE_target.h"
-#include "EVE_config.h"
+#include "/home/seb/HarmonyProjects/FT800-FT813/EVE_target.h"
+#include "/home/seb/HarmonyProjects/FT800-FT813/EVE_config.h"
+
+#define BT81X_ENABLE
 
 #ifndef EVE_H_
 #define EVE_H_

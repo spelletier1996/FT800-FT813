@@ -90,7 +90,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 		#include "definitions.h"
 
 		#if defined (__ATSAME70Q21B__) 
-		#define EVE_DELAY_1MS 300000	/* ~1ms at 300000MHz Core-Clock and activated cache, according to my Logic-Analyzer */
+		#define EVE_DELAY_1MS 30000/* ~1ms at 300 000 000MHz Core-Clock and activated cache, according to my Logic-Analyzer */
 		#endif
 
 
@@ -108,22 +108,22 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 		static inline void EVE_pdn_set(void)
 		{
-			PIOD_REGS->PIO_SODR = (1<<25);
+			EVE_PD_Clear();
 		}
 
 		static inline void EVE_pdn_clear(void)
 		{
-			PIOD_REGS->PIO_CODR = (1<<25);
+            EVE_PD_Set();
 		}
 
 		static inline void EVE_cs_set(void)
 		{
-			//PORT->Group[EVE_CS_PORT].OUTCLR.reg = EVE_CS;
+			EVE_CS_Clear();
 		}
 
 		static inline void EVE_cs_clear(void)
 		{
-			//PORT->Group[EVE_CS_PORT].OUTSET.reg = EVE_CS;
+			EVE_CS_Set();
 		}
 
 		static inline void spi_transmit_async(uint8_t data)

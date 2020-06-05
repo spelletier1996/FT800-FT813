@@ -39,6 +39,25 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
   #include "EVE_target.h"
   #include "EVE_commands.h"
+  #include <stdint.h>
+
+#if defined (__ATSAME70Q21B__)
+
+		void DELAY_MS(uint16_t val)
+		{
+			uint16_t counter;
+
+			while(val > 0)
+			{
+				for(counter=0; counter < EVE_DELAY_1MS;counter++)
+				{
+					__asm__ volatile ("nop");
+				}
+				val--;
+			}
+		}
+
+#endif
 
 	#if defined (__GNUC__)
 		#if defined (__SAMC21E18A__) || (__ATSAMC20G17A__) || (__SAME51J19A__) || (__SAMD51P20A__) || (__SAMD51J19A__) || (__SAMD51G18A__)
