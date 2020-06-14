@@ -47,7 +47,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 #ifndef EVE_CONFIG_H_
 #define EVE_CONFIG_H_
-
+#define EVE_VM816C
 
 /* select the settings for the TFT attached */
 #if 0
@@ -101,7 +101,27 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 	#define EVE_CONNECTEVE
 #endif
 
-#define EVE_VM810C
+#if defined (EVE_VM816C)
+#define EVE_HSIZE	(800L)
+#define EVE_VSIZE	(480L)
+
+#define EVE_VSYNC0	(0L)
+#define EVE_VSYNC1	(3L)
+#define EVE_VOFFSET	(32L)
+#define EVE_VCYCLE	(525L)
+#define EVE_HSYNC0	(0L)
+#define EVE_HSYNC1	(48L)
+#define EVE_HOFFSET	(88L)
+#define EVE_HCYCLE 	(928L)
+#define EVE_PCLKPOL	(1L)
+#define EVE_SWIZZLE	(0L)
+#define EVE_PCLK	(2L)
+#define EVE_CSPREAD	(0L)
+#define EVE_TOUCH_RZTHRESH (1200L)
+#define EVE_HAS_CRYSTAL
+#define FT81X_ENABLE
+#define BT81X_ENABLE
+#endif
 
 
 /* display timing parameters below */
@@ -181,7 +201,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 #define BT81X_ENABLE
 #endif
 
-
 /* some test setup */
 #if defined (EVE_800x480x)
 #define EVE_HSIZE	(800L)	/* Thd Length of visible part of line (in PCLKs) - display width */
@@ -251,7 +270,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 /* untested */
 /* FTDI/BRT EVE2 modules VM810C50A-D, ME812A-WH50R and ME813A-WH50C, 800x480 5.0" */
-#if defined (EVE_VM810C) || defined (EVE_ME812A) || defined (EVE_ME813A)
+#if defined (EVE_VM810C) || defined (EVE_ME812A) || defined (EVE_ME813A) 
 #define EVE_HSIZE	(800L)
 #define EVE_VSIZE	(480L)
 

@@ -108,22 +108,22 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 		static inline void EVE_pdn_set(void)
 		{
-			EVE_PD_Clear();
+			PIOD_REGS->PIO_CODR = (1<<28);
 		}
 
 		static inline void EVE_pdn_clear(void)
 		{
-            EVE_PD_Set();
+            PIOD_REGS->PIO_SODR = (1<<28);
 		}
 
 		static inline void EVE_cs_set(void)
 		{
-			EVE_CS_Clear();
+			PIOD_REGS->PIO_CODR = (1<<16);
 		}
 
 		static inline void EVE_cs_clear(void)
 		{
-			EVE_CS_Set();
+			PIOD_REGS->PIO_SODR = (1<<16);
 		}
 
 		static inline void spi_transmit_async(uint8_t data)
@@ -156,9 +156,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
             
             return recieveData;
             
-//			EVE_SPI->SPI.DATA.reg = data;
-//			while((EVE_SPI->SPI.INTFLAG.reg & SERCOM_SPI_INTFLAG_TXC) == 0);
-//			return EVE_SPI->SPI.DATA.reg;
 		}
 
 		static inline uint8_t fetch_flash_byte(const uint8_t *data)
